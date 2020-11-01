@@ -1,7 +1,7 @@
 from setuptools import setup,find_packages
 setup(
     name='clibf',
-    version='1.0.0',
+    version='1.0.1',
     description='CLI tool to execute Brainfuck code from files and strings',
     long_description=open('README.md').read().replace('my_bf_string', '"' + open('example.b').read() + '"'),
     long_description_content_type="text/markdown",
