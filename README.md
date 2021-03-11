@@ -13,5 +13,5 @@ python -m clibf -f my_bf_script.b
 ```
 ## To directly execute a string as a brainfuck code:
 ```bat
-python -m clibf -s my_bf_string
+python -m clibf -s "my_bf_string"
 ```
