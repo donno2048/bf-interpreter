@@ -1,17 +1,31 @@
 # clibf
-## To install it from PyPi use:
-```bat
+
+## Install it from PyPi
+
+```
 pip install clibf
 ```
-## To install it from GitHub use:
-```bat
+
+## Install it from GitHub
+
+```
 pip install git+https://github.com/donno2048/bf-interpreter
 ```
-## To execute a brainfuck file use:
-```bat
-python -m clibf -f my_bf_script.b
+
+## Execute a brainfuck file
+
 ```
-## To directly execute a string as a brainfuck code:
-```bat
-python -m clibf -s "my_bf_string"
+clibf -f my_bf_script.b
+```
+
+## Execute a string as a brainfuck code
+
+```
+clibf -s "my_bf_string"
+```
+
+## Execute a file with a GUI
+
+```
+clibf -g
 ```

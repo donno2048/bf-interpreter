@@ -1,4 +1,5 @@
 from clibf import string, file
+pointer, data = 0, [0] * 30000
 def end(source, loops = 1):
     for i in range(len(source)):
         loops += (source[i] == '[') - (source[i] == ']')
@@ -13,7 +14,6 @@ def execute(source, i = 0):
     return data
 def execute_loop(source):
     while execute(source)[pointer] % 256:pass
-pointer, data = 0, [0] * 30000
-if __name__ == '__main__':
-    if file is None:execute(string)
+def main():
+    if file is None: execute(string)
     else:execute(open(file,'r').read())

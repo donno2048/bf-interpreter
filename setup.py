@@ -9,5 +9,6 @@ setup(
     packages=find_packages(),
     license='MIT',
     author='Elisha Hollander',
-    classifiers=['Programming Language :: Python :: 3']
+    classifiers=['Programming Language :: Python :: 3'],
+    entry_points={ 'console_scripts': [ 'clibf=clibf.__main__:main' ] }
 )
