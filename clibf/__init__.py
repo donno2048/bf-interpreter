@@ -1,14 +1,15 @@
-from argparse import ArgumentParser
-parser = ArgumentParser(description = 'Brainfuck input')
-group = parser.add_mutually_exclusive_group(required = True)
-group.add_argument('-g', '--gui', action='store_true')
-group.add_argument('-s', '--string', metavar='', type = str)
-group.add_argument('-f', '--file', metavar='', type = str)
-args = parser.parse_args()
-string = args.string
-file = args.file
-if args.gui:
-    from tkinter import Tk
-    from tkinter.filedialog import askopenfilename
-    Tk().withdraw()
-    file = askopenfilename(filetypes = [("Brainfuck files", "*.b")])
+pointer, data = 0, [0] * 30000
+def end(source, loops = 1):
+    for i in range(len(source)):
+        loops += (source[i] == '[') - (source[i] == ']')
+        if not loops: return i + 1
+def execute(source, i = 0):
+    global pointer, data
+    while i < len(source):
+        pointer += (source[i] == '>') - (source[i] == '<'); pointer %= 30000; data[pointer] += (source[i] == '+') - (source[i] == '-'); print((source[i] == '.') * f"{data[pointer] % 256:c}", end='')
+        if source[i] == ',': data[pointer] = ord(input('\n'))
+        if source[i] == '[': j = end(source[i + 1:]); execute_loop(source[i + 1 : j + i]); i += j
+        i += 1
+    return data
+def execute_loop(source):
+    while execute(source)[pointer] % 256: pass
