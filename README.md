@@ -20,6 +20,8 @@ pip install git+https://github.com/donno2048/bf-interpreter
 
 ```sh
 clibf -f my_bf_script.b
+# or with a prompt
+clibf -F
 ```
 
 ### String
