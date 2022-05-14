@@ -29,28 +29,38 @@ void execute_loop(char *source, int loop_end) {
 void execute(char *source, int loop_end) {
     int i = 0;
     while (source[i] && (i < loop_end || !loop_end)) {
-        if (source[i] == '>') {
+        switch (source[i]) {
+        case '>':
             pointer++;
             pointer %= 30000;
-        } else if (source[i] == '<') {
+            break;
+        case '<':
             pointer--;
             pointer += 30000;
             pointer %= 30000;
-        } else if (source[i] == '+') {
+            break;
+        case '+':
             data[pointer]++;
             data[pointer] %= 256;
-        } else if (source[i] == '-') {
+            break;
+        case '-':
             data[pointer]--;
             data[pointer] += 256;
             data[pointer] %= 256;
-        } else if (source[i] == '.') {
-            printf("%c", data[pointer] % 256);
-        } else if (source[i] == ',') {
+            break;
+        case '.':
+            putchar(data[pointer]);
+            break;
+        case ',':
             data[pointer] = getchar();
-        } else if (source[i] == '[') {
+            break;
+        case '[':
             int j = end(source + i + 1);
             execute_loop(source + i + 1, j);
             i += j;
+            break;
+        default:
+            break;
         }
         i++;
     }
