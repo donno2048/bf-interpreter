@@ -1,4 +1,4 @@
-from clibf import execute
+from _clibf import run
 from questionary import path
 from argparse import ArgumentParser
 def main():
@@ -16,7 +16,7 @@ def main():
         from tkinter.filedialog import askopenfilename
         Tk().withdraw()
         file = askopenfilename(filetypes = [("Brainfuck files", "*.b")])
-    if file is None: execute(string)
-    else: execute(open(file).read())
+    if file is None: run(string)
+    else: run(open(file).read())
     print() # Newline
 if __name__ == '__main__': main()
