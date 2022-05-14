@@ -27,7 +27,7 @@ clibf -F
 ### String
 
 ```sh
-clibf -s "my_bf_string"
+clibf -s "+[+[<<<+>>>>]+<-<-<<<+<++]<<.<++.<++..+++.<<++.<---.>>.>.+++.------.>-.>>--."
 ```
 
 ### Choose file with GUI
