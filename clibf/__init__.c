@@ -19,6 +19,7 @@ int end(char *source) {
         loops += (source[i] == '[') - (source[i] == ']');
         if (!loops) return i + 1;
     }
+    return -1;
 }
 void execute(char *source, int loop_end);
 void execute_loop(char *source, int loop_end) {
@@ -26,8 +27,12 @@ void execute_loop(char *source, int loop_end) {
         execute(source, loop_end);
     } while (data[pointer]);
 }
-void execute(char *source, int loop_end) {
-    int i = 0;
+int execute(const char *source, int loop_end) {
+    if (loop_end == -1) {
+        PyErr_SetString(PyExc_ValueError, "'[' and ']' mismatched");
+        return 1;
+    }
+    int i = 0, j;
     while (source[i] && (i < loop_end || !loop_end)) {
         switch (source[i]) {
         case '>':
@@ -55,7 +60,7 @@ void execute(char *source, int loop_end) {
             data[pointer] = getchar();
             break;
         case '[':
-            int j = end(source + i + 1);
+            j = end(source + i + 1);
             execute_loop(source + i + 1, j);
             i += j;
             break;
@@ -64,13 +69,15 @@ void execute(char *source, int loop_end) {
         }
         i++;
     }
+    return 0;
 }
 static PyObject * run(PyObject * self, PyObject * arg) {
     if (!PyUnicode_Check(arg)) {
         PyErr_SetString(PyExc_TypeError, "Argument must be a string");
         return NULL;
     }
-    execute(PyUnicode_AsUTF8(arg), 0);
+    if (execute(PyUnicode_AsUTF8(arg), 0))
+        return NULL;
     Py_RETURN_NONE;
 }
 #ifdef __cplusplus
