@@ -2,7 +2,7 @@ from setuptools import setup, find_packages, Extension
 from os.path import join
 setup(
     name='clibf',
-    version='1.1.3',
+    version='1.1.4',
     description='CLI tool to execute Brainfuck code from files and strings',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
