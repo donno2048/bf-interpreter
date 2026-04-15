@@ -21,11 +21,13 @@ int end(char *source) {
     }
     return -1;
 }
-void execute(char *source, int loop_end);
-void execute_loop(char *source, int loop_end) {
+int execute(const char *source, int loop_end);
+int execute_loop(const char *source, int loop_end) {
     do {
-        execute(source, loop_end);
+        if (execute(source, loop_end))
+            return 1;
     } while (data[pointer]);
+    return 0;
 }
 int execute(const char *source, int loop_end) {
     if (loop_end == -1) {
@@ -61,7 +63,8 @@ int execute(const char *source, int loop_end) {
             break;
         case '[':
             j = end(source + i + 1);
-            execute_loop(source + i + 1, j);
+            if (execute_loop(source + i + 1, j))
+                return 1;
             i += j;
             break;
         default:
